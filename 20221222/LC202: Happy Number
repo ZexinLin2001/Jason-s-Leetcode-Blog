@@ -24,4 +24,29 @@ class Solution {
         return true;    
     }
 }
-//快慢指针解法
+//Better Algo:
+//快慢指针解法 - 想象成一个链表，快指针会陷入循环就会和慢指针相遇，不陷入循环则会优先到1则return true；
+//时间复杂度 O(logN)
+//空间复杂度 O(1)
+class Solution {
+    public boolean isHappy(int n) {
+        if (n <= 0) return false;
+        int fast = getNext(n);
+        int slow = n;
+        while (fast != 1 && fast != slow) {
+            slow = getNext(slow);
+            fast = getNext(getNext(fast));
+        }
+        return fast == 1;
+    }
+    //getNext Method : get Next n value.
+    public int getNext(int n) {
+        int res = 0;
+        while (n != 0) {
+            int digit = n % 10;
+            n = n / 10;
+            res += digit * digit;
+        }
+        return res;
+    }
+}
