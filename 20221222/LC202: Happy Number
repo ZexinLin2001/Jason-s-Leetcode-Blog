@@ -1,0 +1,27 @@
+//哈希表解法
+//时间复杂度 O(logN)
+//空间复杂度 O(logN)
+class Solution {
+    public boolean isHappy(int n) {
+        if (n <= 0) return false;
+        HashSet<Integer> track = new HashSet<>();
+        track.add(n);
+        while (n != 1) {
+            int update = 0;
+            while (n != 0) {
+                int digit = n % 10;
+                n = n / 10;
+                update += Math.pow(digit,2);
+            }
+            if (update == 1) return true;
+            if (track.contains(update)) {
+                return false;
+            } else {
+                n = update;
+                track.add(n);
+            }    
+        } 
+        return true;    
+    }
+}
+//快慢指针解法
