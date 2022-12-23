@@ -1,0 +1,28 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+//可以理解为fast去拆炸弹而dummy保持原位，但是fast会把dummy的内存拆了，所以dummy.next就是我们最后需要用的
+//head并不能给正确信息因为head有些存储信息并不受到影响
+class Solution {
+    public ListNode removeElements(ListNode head, int val) {
+        if (head == null) return head;
+        ListNode dummy = new ListNode(-1); //建立dummy的目的是检测头节点
+        dummy.next = head;
+        ListNode fast = dummy;
+        while (fast.next != null) {
+            if (fast.next.val == val) {
+                fast.next = fast.next.next;             
+            } else {
+                fast = fast.next;
+            }
+        }
+        return dummy.next;
+    }
+}
