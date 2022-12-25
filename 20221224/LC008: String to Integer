@@ -1,0 +1,41 @@
+// 类似007的题目的升级版
+// 需要处理溢出问题
+// woc老子debug了一个半小时这题真的酸Q
+class Solution {
+    public int myAtoi(String s) {
+        if (s.length() == 0) return 0;
+        int result = 0;
+        boolean isNegative = false;
+        int index = 0;
+        while (s.charAt(index) == ' ' && index + 1 < s.length()) {
+            index++;
+        }
+        //检查符号
+        if (s.charAt(index) == '-' && index + 1 < s.length()) {
+                isNegative = true;
+                index++;
+        } else if (s.charAt(index) == '+' && index + 1 < s.length()) {
+                isNegative = false;
+                index++;
+        }
+        //到达第一个非空
+        for (int i = index; i < s.length(); i++) {          
+            if (Character.isDigit(s.charAt(i))) {
+                int digit  = s.charAt(i) - '0';
+                if (isNegative) {
+                    if (-result < Integer.MIN_VALUE / 10 || (-result == Integer.MIN_VALUE / 10 && -digit < -8)) {
+                        return Integer.MIN_VALUE;
+                    }
+                } else {
+                    if (result > Integer.MAX_VALUE / 10 || (result == Integer.MAX_VALUE / 10 && digit > 7)) {
+                        return Integer.MAX_VALUE;
+                    }
+                }
+                result = result * 10 + digit;
+            } else {
+                break;
+            }
+        }
+        return isNegative? -result : result;
+    }
+}
