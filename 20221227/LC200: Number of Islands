@@ -1,0 +1,33 @@
+//岛屿问题刷题系列：
+//200 岛屿数量 （Medium）- 本题
+//463 岛屿的周长 （Easy）
+//695 岛屿的最大面积 （Medium）
+//827 最大人工岛 （Hard）
+//谷歌真题 ：高频题
+//2D Array
+//网格问题
+//BFS||DFS
+class Solution {
+    public int numIslands(char[][] grid) {
+        int count = 0;
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[i].length; j++) {
+                if (grid[i][j] == '1') {
+                    count++;
+                    BFS(grid, i, j);
+                }
+            }
+        }
+        return count;
+    }
+    public void BFS(char[][] grid, int i, int j) {
+        //bound case:
+        if (i < 0 || i > grid.length - 1 || j < 0 || j > grid[i].length - 1 || grid[i][j] == '0') return;
+        //如果是1的话：
+        grid[i][j] = '0'; //避免重复使用
+        BFS(grid, i + 1, j);
+        BFS(grid, i - 1, j);
+        BFS(grid, i, j + 1);
+        BFS(grid, i, j - 1);
+    }
+}
