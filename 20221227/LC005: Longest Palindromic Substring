@@ -1,0 +1,47 @@
+//中心扩散法解题（新）
+//双指针左右扩散从index:0开始
+class Solution {
+    public String longestPalindrome(String s) {
+        if(s == null || s.length() == 0) return "";
+        //设置变量
+        int sLen = s.length();
+        int len = 1;
+        //结果变量
+        int finalLeft = 0;
+        int finalRight = 0;
+        int maxLen = 1;
+        //设置扩散指针
+        int left = 0;
+        int right = 0;
+        //开始扩散
+        for (int i = 0; i < sLen; i++) {
+            //先开始分配左右指针：如果左边或者右边跟当前中心相同可以移动指针as far as possible
+            left = i;
+            right = i;
+            //分配左指针到最远位置
+            while (left > 0 && s.charAt(left) == s.charAt(left-1)) {
+                left -= 1;
+                len += 1;
+            }
+            //分配右指针到最远位置
+            while (right < sLen - 1 && s.charAt(right) == s.charAt(right+1)) {
+                right += 1;
+                len += 1;
+            }
+            //开始扩散步骤
+            while (left > 0 && right < sLen - 1 && s.charAt(left - 1) == s.charAt(right + 1)) {
+                right += 1;
+                left -= 1;
+                len += 2;
+            }
+            //比较结果的大小并且设置最优的左右指针
+            if (len > maxLen) {
+                maxLen = len;
+                finalLeft = left;
+                finalRight = right;
+            }
+            len = 1;
+        }
+        return s.substring(finalLeft, finalRight + 1);
+    }
+}
