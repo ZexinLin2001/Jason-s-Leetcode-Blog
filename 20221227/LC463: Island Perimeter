@@ -1,0 +1,24 @@
+//岛屿问题刷题系列：
+//200 岛屿数量 （Medium） - see 20221227
+//463 岛屿的周长 （Easy）- 本题
+//695 岛屿的最大面积 （Medium）
+//827 最大人工岛 （Hard）
+
+class Solution {
+    public int islandPerimeter(int[][] grid) {
+        if (grid == null || grid.length == 0) {
+            return 0;
+        }
+        int perimeter = 0;
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[i].length; j++) {
+                if (grid[i][j] == 1) {
+                    perimeter += 4;
+                    if (i > 0 && grid[i-1][j] == 1) perimeter -= 2; // 1 + 1 = 2 两个方格都要少一条边
+                    if (j > 0 && grid[i][j-1] == 1) perimeter -= 2; // 1 + 1 = 2 两个方格都要少一条边
+                }
+            }
+        }
+        return perimeter;
+    }
+}
