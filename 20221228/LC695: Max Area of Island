@@ -1,0 +1,31 @@
+//岛屿问题刷题系列：
+//200 岛屿数量 （Medium） - see 20221227
+//463 岛屿的周长 （Easy）- see 20221227
+//695 岛屿的最大面积 （Medium）- 本题
+//827 最大人工岛 （Hard）
+class Solution {
+    public int maxAreaOfIsland(int[][] grid) {
+        int maxArea = 0;
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[i].length; j++) {
+                if (grid[i][j] == 1) {
+                    maxArea = Math.max(bfs(grid, i, j), maxArea);
+                }      
+            }
+        }
+        return maxArea;
+    }
+    
+    public int bfs(int[][] grid, int i, int j) {
+        if (i < 0 || i >= grid.length || j < 0 || j >= grid[i].length || grid[i][j] == 0) {
+            return 0 ;
+        }
+        grid[i][j] = 0;
+        int count = 1;
+        count += bfs(grid, i + 1, j);
+        count += bfs(grid, i - 1, j);
+        count += bfs(grid, i, j + 1);
+        count += bfs(grid, i, j - 1);
+        return count;
+    }
+}
