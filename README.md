@@ -1,8 +1,8 @@
 # Jasons-Leetcode-Blog
-For Loop and Struggle: 小狗的刷题日志本！
+For Loop and Struggle: 小林的刷题日志本！
 \
-记录一下自己刷题的一些日常和碎碎念
+#刷题的日常和碎碎念
 \
-#Java语言算法
+#Java语言数据结构与算法
 \
 #从入门到入眠
