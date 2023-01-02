@@ -1,0 +1,13 @@
+//26进制解法
+// A.    B.   C.
+// 26^2 26^1 26^0
+class Solution {
+    public int titleToNumber(String columnTitle) {
+        if (columnTitle.equals("")) return 0;
+        int res = 0;
+        for (int i = 0; i < columnTitle.length(); i++) {
+            res = res * 26 + columnTitle.charAt(i) - 'A' + 1;
+        } 
+        return res;
+    }
+}
